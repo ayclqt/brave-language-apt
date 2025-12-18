@@ -1,0 +1,8 @@
+#!/bin/sh
+LANGUAGE_CODE="${1:-vi_VN}"
+BRAVESCRIPT=/opt/brave.com/brave/brave-browser
+# Skip if LANGUAGE export already exists
+grep -q "export LANGUAGE=" "$BRAVESCRIPT" && exit 0
+# Backup and insert after first line
+cp "$BRAVESCRIPT" "$BRAVESCRIPT.old" -f
+sed -i "1 a export LANGUAGE=\"$LANGUAGE_CODE\"" "$BRAVESCRIPT"
